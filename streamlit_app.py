@@ -21,7 +21,7 @@ html, body, [class*="css"] { font-family: Inter, ui-sans-serif, system-ui, -appl
 .mc-nav { min-height:72px; display:flex; align-items:center; justify-content:space-between; padding:0 22px; margin-bottom:48px; border:1px solid #e3e9f2; border-radius:17px; background:rgba(255,255,255,.96); box-shadow:0 10px 34px rgba(25,42,78,.06); }
 .mc-brand { display:flex; align-items:center; gap:11px; font-size:20px; font-weight:800; color:#0b1739; }
 .mc-mark { width:38px; height:42px; display:grid; place-items:center; color:white; font-weight:850; background:linear-gradient(145deg,#1f5deb,#4992ff); clip-path:polygon(50% 0%,94% 17%,88% 72%,50% 100%,12% 72%,6% 17%); }
-.mc-links { display:flex; gap:30px; font-size:14px; font-weight:700; color:#60708e; } .mc-links span:first-child { color:#2f6cf6; }
+.mc-links { display:flex; gap:30px; font-size:14px; font-weight:700; } .mc-links a { color:#60708e; text-decoration:none; cursor:pointer; transition:color .18s ease; } .mc-links a:hover { color:#2f6cf6; } .mc-links a:first-child { color:#2f6cf6; } #scanner, #how-to-use, #about { scroll-margin-top:24px; }
 .mc-pill { padding:8px 13px; border-radius:999px; color:#1e55d9; background:#eef4ff; border:1px solid #d8e5ff; font-size:12px; font-weight:800; }
 .eyebrow { color:#2f6cf6; font-size:11px; font-weight:850; letter-spacing:.12em; text-transform:uppercase; margin-bottom:10px; }
 .hero-title { max-width:900px; color:#0b1739; font-size:clamp(38px,5vw,56px); line-height:1.04; letter-spacing:-.05em; font-weight:800; } .hero-title b { color:#2f6cf6; }
@@ -39,7 +39,7 @@ html, body, [class*="css"] { font-family: Inter, ui-sans-serif, system-ui, -appl
 </style>
 ''')
 
-st.html('''<div class="mc-nav"><div class="mc-brand"><div class="mc-mark">M</div><span>ModerContext</span></div><div class="mc-links"><span>Scanner</span><span>How to use</span><span>About</span></div><div class="mc-pill">Research Prototype</div></div><div class="eyebrow">Source Code Security Scanner</div><div class="hero-title">Analyze C/C++ code for <b>potential vulnerabilities</b></div><div class="hero-copy">Submit one C or C++ function and ModerContext will process the source code, analyze its security-relevant context, and return a clear vulnerability detection result.</div>''')
+st.html('''<div class="mc-nav"><div class="mc-brand"><div class="mc-mark">M</div><span>ModerContext</span></div><div class="mc-links"><a href="#scanner">Scanner</a><a href="#how-to-use">How to use</a><a href="#about">About</a></div><div class="mc-pill">Research Prototype</div></div><div id="scanner"></div><div class="eyebrow">Source Code Security Scanner</div><div class="hero-title">Analyze C/C++ code for <b>potential vulnerabilities</b></div><div class="hero-copy">Submit one C or C++ function and ModerContext will process the source code, analyze its security-relevant context, and return a clear vulnerability detection result.</div>''')
 
 DEFAULT_CODE = '''void process_input(const char *input) {
     char buffer[64];
@@ -138,13 +138,13 @@ with right:
         else:
             st.html('<div class="ready"><div class="ready-icon">⌕</div><div class="panel-kicker">Scanner ready</div><h2>Ready to analyze</h2><p>Paste a C or C++ function in the editor and select <b>Analyze code</b> to begin.</p></div>')
 
-st.html('<div class="lower"><div class="eyebrow" style="text-align:center">Simple workflow</div><div class="lower-title">How to use ModerContext</div></div>')
+st.html('<div id="how-to-use" class="lower"><div class="eyebrow" style="text-align:center">Simple workflow</div><div class="lower-title">How to use ModerContext</div></div>')
 cols = st.columns(3, gap="medium")
 items = [("01", "Paste your function", "Copy one C or C++ function into the source-code editor."), ("02", "Run the analysis", "ModerContext pre-processes and evaluates the submitted source code."), ("03", "Review the result", "Receive a clear vulnerability detection outcome to support secure code review.")]
 for col, (num, title, copy) in zip(cols, items):
     with col:
         with st.container(border=True): st.html(f'<div class="guide-num">{num}</div><div class="guide-title">{title}</div><div class="guide-copy">{copy}</div>')
 
-st.html('<div class="lower"><div class="eyebrow" style="text-align:center">About the prototype</div><div class="lower-title">ModerContext</div></div>')
+st.html('<div id="about" class="lower"><div class="eyebrow" style="text-align:center">About the prototype</div><div class="lower-title">ModerContext</div></div>')
 with st.container(border=True):
     st.html("""<div class="about"><b>ModerContext</b> is a master's research prototype for source code vulnerability detection. It applies the proposed context-aware processing methodology and a trained long-context classifier to C/C++ functions. The prototype demonstrates practical use of the research approach; its output should support, not replace, professional secure code review.</div>""")
