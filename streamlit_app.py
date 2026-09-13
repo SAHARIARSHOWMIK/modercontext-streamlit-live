@@ -56,60 +56,307 @@ html, body, [class*="css"] {
   padding-bottom: 4.5rem;
 }
 
-/* Top navigation */
-.st-key-topbar { margin-bottom: 48px; }
-.st-key-topbar [data-testid="stVerticalBlockBorderWrapper"] {
-  background: rgba(255,255,255,.96) !important;
-  border: 1px solid #e2e8f2 !important;
-  border-radius: 20px !important;
-  box-shadow: 0 14px 42px rgba(24, 45, 86, .07) !important;
-  padding: 10px 15px !important;
-}
-.mc-brand {
-  display:flex; align-items:center; gap:12px;
-  min-height:48px;
-  color:var(--mc-navy); font-size:22px; font-weight:850;
-  letter-spacing:-.02em;
-}
-.mc-mark {
-  width:42px; height:46px; display:grid; place-items:center;
-  color:white; font-size:18px; font-weight:900;
-  background:linear-gradient(145deg,#1e5dea,#4a94ff);
-  clip-path:polygon(50% 0%,94% 17%,88% 72%,50% 100%,12% 72%,6% 17%);
-  filter:drop-shadow(0 8px 14px rgba(47,108,246,.22));
-}
-.mc-pill-wrap { display:flex; justify-content:flex-end; align-items:center; min-height:48px; }
-.mc-pill {
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:9px 14px; border-radius:999px;
-  color:#2457d8; background:#eef4ff; border:1px solid #d7e4ff;
-  font-size:12px; font-weight:850; white-space:nowrap;
+
+/* CLEAN_TOPBAR_FINAL_V1 */
+/* ==========================================================
+   MODERCONTEXT HEADER ? SINGLE SOURCE OF TRUTH
+   ========================================================== */
+
+/* The REAL Streamlit container uses key="topbar" */
+.st-key-topbar {
+    width: calc(100% - 48px) !important;
+    max-width: 1200px !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    margin-top: 8px !important;
+    margin-bottom: 46px !important;
+
+    align-self: center !important;
+    justify-self: center !important;
+
+    box-sizing: border-box !important;
 }
 
+.st-key-topbar > div {
+    width: 100% !important;
+}
+
+
+/* -----------------------------
+   HEADER CARD
+   ----------------------------- */
+
+.st-key-topbar [data-testid="stVerticalBlockBorderWrapper"] {
+    width: 100% !important;
+
+    box-sizing: border-box !important;
+
+    background: rgba(255,255,255,.98) !important;
+
+    border: 1px solid #dfe6f0 !important;
+    border-radius: 18px !important;
+
+    padding: 8px 18px !important;
+
+    box-shadow:
+        0 1px 2px rgba(15,23,42,.02),
+        0 10px 30px rgba(24,45,86,.055) !important;
+}
+
+.st-key-topbar [data-testid="stVerticalBlock"] {
+    gap: 0 !important;
+}
+
+
+/* -----------------------------
+   BRAND / LOGO
+   ----------------------------- */
+
+.mc-brand {
+    display: flex !important;
+    align-items: center !important;
+
+    gap: 13px !important;
+
+    min-height: 56px !important;
+
+    color: var(--mc-navy) !important;
+
+    font-size: 27px !important;
+    line-height: 1 !important;
+
+    font-weight: 850 !important;
+    letter-spacing: -.035em !important;
+
+    white-space: nowrap !important;
+}
+
+.mc-mark {
+    width: 41px !important;
+    height: 45px !important;
+
+    display: grid !important;
+    place-items: center !important;
+
+    color: #fff !important;
+
+    font-size: 19px !important;
+    font-weight: 900 !important;
+
+    background:
+        linear-gradient(145deg,#1e5dea,#4a94ff) !important;
+
+    clip-path:
+        polygon(
+            50% 0%,
+            94% 17%,
+            88% 72%,
+            50% 100%,
+            12% 72%,
+            6% 17%
+        ) !important;
+
+    filter:
+        drop-shadow(
+            0 7px 13px rgba(47,108,246,.18)
+        ) !important;
+}
+
+
+/* -----------------------------
+   NAVIGATION
+   ----------------------------- */
+
+.st-key-nav_scanner,
+.st-key-nav_how,
+.st-key-nav_about {
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+
+/* Default */
 .st-key-nav_scanner button,
 .st-key-nav_how button,
 .st-key-nav_about button {
-  width:100% !important;
-  min-height:40px !important;
-  border:0 !important;
-  border-radius:10px !important;
-  background:transparent !important;
-  box-shadow:none !important;
-  color:#60708e !important;
-  font-weight:800 !important;
-  padding:0 8px !important;
+
+    width: auto !important;
+    min-width: 0 !important;
+
+    min-height: 46px !important;
+
+    padding: 0 12px !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+
+    box-shadow: none !important;
+
+    color: #64748b !important;
+
+    font-size: 18px !important;
+    line-height: 1 !important;
+
+    font-weight: 560 !important;
+    letter-spacing: -.015em !important;
+
+    white-space: nowrap !important;
+
+    transition:
+        color .16s ease,
+        opacity .16s ease !important;
 }
+
+
+/* Hover */
 .st-key-nav_scanner button:hover,
 .st-key-nav_how button:hover,
 .st-key-nav_about button:hover {
-  color:var(--mc-blue) !important;
-  background:#f4f7ff !important;
+    color: var(--mc-blue) !important;
+    background: transparent !important;
 }
+
+
+/* Active */
 .st-key-nav_scanner button[kind="primary"],
 .st-key-nav_how button[kind="primary"],
 .st-key-nav_about button[kind="primary"] {
-  color:var(--mc-blue) !important;
-  background:#eef4ff !important;
+
+    color: var(--mc-blue) !important;
+
+    background: transparent !important;
+
+    font-weight: 800 !important;
+
+    box-shadow:
+        inset 0 -3px 0 var(--mc-blue) !important;
+}
+
+
+/* Focus */
+.st-key-nav_scanner button:focus,
+.st-key-nav_how button:focus,
+.st-key-nav_about button:focus {
+    outline: none !important;
+}
+
+
+/* -----------------------------
+   RESEARCH PROTOTYPE BADGE
+   ----------------------------- */
+
+.mc-pill-wrap {
+    display: flex !important;
+
+    justify-content: flex-end !important;
+    align-items: center !important;
+
+    min-height: 56px !important;
+}
+
+.mc-pill {
+    display: inline-flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 10px 16px !important;
+
+    border-radius: 999px !important;
+
+    color: #2457d8 !important;
+
+    background: #f4f8ff !important;
+
+    border: 1px solid #d7e4ff !important;
+
+    font-size: 14px !important;
+    line-height: 1 !important;
+
+    font-weight: 800 !important;
+
+    white-space: nowrap !important;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+    .st-key-topbar {
+        width: calc(100% - 24px) !important;
+        margin-bottom: 34px !important;
+    }
+
+    .st-key-topbar [data-testid="stHorizontalBlock"] {
+        flex-wrap: wrap !important;
+
+        row-gap: 8px !important;
+    }
+
+    .mc-brand {
+        font-size: 23px !important;
+    }
+
+    .mc-mark {
+        width: 37px !important;
+        height: 41px !important;
+
+        font-size: 17px !important;
+    }
+
+    .st-key-nav_scanner button,
+    .st-key-nav_how button,
+    .st-key-nav_about button {
+        font-size: 16px !important;
+
+        min-height: 40px !important;
+
+        padding: 0 9px !important;
+    }
+
+    .mc-pill {
+        font-size: 12.5px !important;
+
+        padding: 8px 12px !important;
+    }
+}
+
+
+@media (max-width: 640px) {
+
+    .st-key-topbar {
+        width: calc(100% - 16px) !important;
+    }
+
+    .st-key-topbar [data-testid="stVerticalBlockBorderWrapper"] {
+        padding: 10px 12px !important;
+    }
+
+    .st-key-topbar [data-testid="stHorizontalBlock"] {
+        justify-content: center !important;
+    }
+
+    .mc-brand,
+    .mc-pill-wrap {
+        justify-content: center !important;
+    }
+
+    .st-key-nav_scanner button,
+    .st-key-nav_how button,
+    .st-key-nav_about button {
+        font-size: 14.5px !important;
+
+        padding: 0 7px !important;
+    }
 }
 
 /* Typography */
@@ -265,622 +512,8 @@ div[data-testid="stProgress"] > div > div > div { background:linear-gradient(90d
 
 @media(max-width: 900px) {
   .block-container { padding-left:1rem; padding-right:1rem; }
-  .mc-pill-wrap { display:none; }
   .mc-hero-title { font-size:38px; }
   .meta { grid-template-columns:1fr; }
-}
-
-/* SENIOR_NAV_POLISH_V1 */
-
-/* ---------- Streamlit chrome ---------- */
-[data-testid="stToolbar"] {
-    display: none !important;
-}
-
-#MainMenu {
-    visibility: hidden !important;
-}
-
-footer {
-    visibility: hidden !important;
-}
-
-/* ---------- Main navbar ---------- */
-.st-key-mc_nav {
-    margin-top: 4px !important;
-    margin-bottom: 30px !important;
-}
-
-/* Border container */
-.st-key-mc_nav [data-testid="stVerticalBlockBorderWrapper"] {
-    background: rgba(255,255,255,0.98) !important;
-    border: 1px solid #e5eaf2 !important;
-    border-radius: 18px !important;
-
-    padding: 8px 16px !important;
-
-    box-shadow:
-        0 1px 2px rgba(15,23,42,0.02),
-        0 8px 24px rgba(15,23,42,0.045) !important;
-}
-
-/* Remove unnecessary vertical spacing */
-.st-key-mc_nav [data-testid="stVerticalBlock"] {
-    gap: 0 !important;
-}
-
-/* ---------- Brand ---------- */
-.mc-brand {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-
-    color: #0b1739 !important;
-    font-size: 21px !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.025em !important;
-    white-space: nowrap !important;
-}
-
-.mc-mark {
-    width: 36px !important;
-    height: 40px !important;
-
-    display: grid !important;
-    place-items: center !important;
-
-    font-size: 17px !important;
-    font-weight: 850 !important;
-}
-
-/* ---------- Navigation ---------- */
-.st-key-nav_scanner,
-.st-key-nav_how,
-.st-key-nav_about {
-    display: flex !important;
-    justify-content: center !important;
-}
-
-.st-key-nav_scanner button,
-.st-key-nav_how button,
-.st-key-nav_about button {
-    min-height: 38px !important;
-    height: 38px !important;
-
-    width: auto !important;
-    min-width: auto !important;
-
-    padding: 0 14px !important;
-
-    border: 0 !important;
-    border-radius: 8px !important;
-
-    background: transparent !important;
-
-    color: #64748b !important;
-
-    font-size: 14px !important;
-    font-weight: 650 !important;
-    letter-spacing: -0.01em !important;
-
-    box-shadow: none !important;
-
-    transition:
-        background-color .16s ease,
-        color .16s ease !important;
-}
-
-/* Hover */
-.st-key-nav_scanner button:hover,
-.st-key-nav_how button:hover,
-.st-key-nav_about button:hover {
-    background: #f6f8fc !important;
-    color: #1e5fe5 !important;
-}
-
-/* Active page */
-.st-key-nav_scanner button[kind="primary"],
-.st-key-nav_how button[kind="primary"],
-.st-key-nav_about button[kind="primary"] {
-    background: transparent !important;
-    color: #2563eb !important;
-
-    border-radius: 0 !important;
-
-    box-shadow:
-        inset 0 -2px 0 #2563eb !important;
-
-    font-weight: 750 !important;
-}
-
-/* Remove focus ring visual noise */
-.st-key-nav_scanner button:focus,
-.st-key-nav_how button:focus,
-.st-key-nav_about button:focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-.st-key-nav_scanner button[kind="primary"]:focus,
-.st-key-nav_how button[kind="primary"]:focus,
-.st-key-nav_about button[kind="primary"]:focus {
-    box-shadow:
-        inset 0 -2px 0 #2563eb !important;
-}
-
-/* ---------- Research badge ---------- */
-.mc-pill {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    padding: 7px 12px !important;
-
-    border: 1px solid #dce7fb !important;
-    border-radius: 999px !important;
-
-    background: #f7faff !important;
-
-    color: #245bd7 !important;
-
-    font-size: 11px !important;
-    font-weight: 750 !important;
-    letter-spacing: .01em !important;
-
-    white-space: nowrap !important;
-}
-
-/* ---------- Mobile ---------- */
-@media (max-width: 850px) {
-
-    .st-key-mc_nav [data-testid="stVerticalBlockBorderWrapper"] {
-        padding: 10px 12px !important;
-    }
-
-    .mc-brand {
-        font-size: 18px !important;
-    }
-
-    .mc-mark {
-        width: 32px !important;
-        height: 36px !important;
-    }
-
-    .st-key-nav_scanner button,
-    .st-key-nav_how button,
-    .st-key-nav_about button {
-        font-size: 13px !important;
-        padding: 0 9px !important;
-    }
-
-    .mc-pill {
-        font-size: 10px !important;
-        padding: 6px 9px !important;
-    }
-}
-
-
-/* MODERCONTEXT_HEADER_V2 */
-
-/* =========================================
-   HEADER CONTAINER
-   ========================================= */
-
-.st-key-mc_nav {
-    width: calc(100% - 40px) !important;
-    max-width: 1200px !important;
-
-    margin-left: auto !important;
-    margin-right: auto !important;
-    margin-top: 8px !important;
-    margin-bottom: 34px !important;
-}
-
-/* Main white navbar card */
-.st-key-mc_nav [data-testid="stVerticalBlockBorderWrapper"] {
-    width: 100% !important;
-
-    background: rgba(255, 255, 255, 0.98) !important;
-
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 18px !important;
-
-    padding: 10px 18px !important;
-
-    box-shadow:
-        0 1px 2px rgba(15, 23, 42, 0.02),
-        0 8px 28px rgba(15, 23, 42, 0.045) !important;
-}
-
-
-/* =========================================
-   LOGO / BRAND
-   ========================================= */
-
-.mc-brand {
-    display: flex !important;
-    align-items: center !important;
-
-    gap: 13px !important;
-
-    font-size: 25px !important;
-    line-height: 1 !important;
-
-    font-weight: 800 !important;
-    letter-spacing: -0.035em !important;
-
-    color: #0b1739 !important;
-
-    white-space: nowrap !important;
-}
-
-.mc-mark {
-    width: 40px !important;
-    height: 44px !important;
-
-    display: grid !important;
-    place-items: center !important;
-
-    font-size: 19px !important;
-    font-weight: 850 !important;
-}
-
-
-/* =========================================
-   NAVIGATION
-   ========================================= */
-
-.st-key-nav_scanner,
-.st-key-nav_how,
-.st-key-nav_about {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-}
-
-/* Normal navigation item */
-.st-key-nav_scanner button,
-.st-key-nav_how button,
-.st-key-nav_about button {
-    width: auto !important;
-    min-width: auto !important;
-
-    height: 44px !important;
-    min-height: 44px !important;
-
-    padding: 0 16px !important;
-
-    background: transparent !important;
-
-    border: none !important;
-    border-radius: 0 !important;
-
-    color: #64748b !important;
-
-    font-size: 17.5px !important;
-    line-height: 1 !important;
-
-    font-weight: 550 !important;
-    letter-spacing: -0.015em !important;
-
-    white-space: nowrap !important;
-
-    box-shadow: none !important;
-
-    transition:
-        color 0.16s ease,
-        background-color 0.16s ease !important;
-}
-
-/* Hover */
-.st-key-nav_scanner button:hover,
-.st-key-nav_how button:hover,
-.st-key-nav_about button:hover {
-    color: #2563eb !important;
-    background: transparent !important;
-}
-
-/* Active navigation item */
-.st-key-nav_scanner button[kind="primary"],
-.st-key-nav_how button[kind="primary"],
-.st-key-nav_about button[kind="primary"] {
-    color: #2563eb !important;
-
-    font-weight: 750 !important;
-
-    background: transparent !important;
-
-    border: none !important;
-
-    box-shadow:
-        inset 0 -3px 0 #2563eb !important;
-}
-
-/* Remove Streamlit focus decoration */
-.st-key-nav_scanner button:focus,
-.st-key-nav_how button:focus,
-.st-key-nav_about button:focus {
-    outline: none !important;
-}
-
-.st-key-nav_scanner button[kind="primary"]:focus,
-.st-key-nav_how button[kind="primary"]:focus,
-.st-key-nav_about button[kind="primary"]:focus {
-    box-shadow:
-        inset 0 -3px 0 #2563eb !important;
-}
-
-
-/* =========================================
-   RESEARCH PROTOTYPE BADGE
-   ========================================= */
-
-.mc-pill {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    padding: 9px 15px !important;
-
-    border: 1px solid #d8e5ff !important;
-    border-radius: 999px !important;
-
-    background: #f4f8ff !important;
-
-    color: #245bd7 !important;
-
-    font-size: 13.5px !important;
-    line-height: 1 !important;
-
-    font-weight: 700 !important;
-    letter-spacing: -0.005em !important;
-
-    white-space: nowrap !important;
-}
-
-
-/* =========================================
-   RESPONSIVENESS
-   ========================================= */
-
-@media (max-width: 1050px) {
-
-    .st-key-mc_nav {
-        width: calc(100% - 28px) !important;
-    }
-
-    .mc-brand {
-        font-size: 22px !important;
-    }
-
-    .mc-mark {
-        width: 37px !important;
-        height: 41px !important;
-        font-size: 17px !important;
-    }
-
-    .st-key-nav_scanner button,
-    .st-key-nav_how button,
-    .st-key-nav_about button {
-        font-size: 16px !important;
-        padding: 0 11px !important;
-    }
-
-    .mc-pill {
-        font-size: 12px !important;
-        padding: 8px 11px !important;
-    }
-}
-
-
-@media (max-width: 800px) {
-
-    .st-key-mc_nav {
-        width: calc(100% - 20px) !important;
-    }
-
-    .st-key-mc_nav [data-testid="stVerticalBlockBorderWrapper"] {
-        padding: 10px 12px !important;
-    }
-
-    /* Allow Streamlit header columns to wrap instead of overflow */
-    .st-key-mc_nav [data-testid="stHorizontalBlock"] {
-        flex-wrap: wrap !important;
-        row-gap: 8px !important;
-    }
-
-    .mc-brand {
-        font-size: 20px !important;
-    }
-
-    .st-key-nav_scanner button,
-    .st-key-nav_how button,
-    .st-key-nav_about button {
-        height: 38px !important;
-        min-height: 38px !important;
-
-        font-size: 15px !important;
-        padding: 0 9px !important;
-    }
-
-    .mc-pill {
-        font-size: 11.5px !important;
-    }
-}
-
-
-@media (max-width: 520px) {
-
-    .st-key-mc_nav {
-        width: calc(100% - 14px) !important;
-    }
-
-    .mc-brand {
-        font-size: 19px !important;
-    }
-
-    .mc-mark {
-        width: 34px !important;
-        height: 38px !important;
-    }
-
-    .st-key-nav_scanner button,
-    .st-key-nav_how button,
-    .st-key-nav_about button {
-        font-size: 14px !important;
-        padding: 0 7px !important;
-    }
-
-    .mc-pill {
-        font-size: 10.5px !important;
-        padding: 7px 9px !important;
-    }
-}
-
-
-/* FINAL_PAGE_WIDTH_FIX */
-
-/*
-   IMPORTANT:
-   Streamlit's parent page container controls the real width.
-   Constrain that first, then let the navbar fill it.
-*/
-
-[data-testid="stMainBlockContainer"],
-.stMainBlockContainer,
-section.main > div.block-container,
-.block-container {
-    width: 100% !important;
-    max-width: 1320px !important;
-
-    margin-left: auto !important;
-    margin-right: auto !important;
-
-    padding-left: 40px !important;
-    padding-right: 40px !important;
-    padding-top: 26px !important;
-}
-
-
-/* Navbar now fills the CENTERED application container */
-.st-key-nav_outer {
-    width: 100% !important;
-    max-width: none !important;
-
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-
-/* Actual navbar card */
-.st-key-mc_nav {
-    width: 100% !important;
-    max-width: none !important;
-
-    margin-left: auto !important;
-    margin-right: auto !important;
-
-    border-radius: 16px !important;
-}
-
-
-/* Header row */
-.st-key-mc_nav [data-testid="stHorizontalBlock"] {
-    width: 100% !important;
-
-    min-height: 76px !important;
-
-    padding-left: 24px !important;
-    padding-right: 24px !important;
-
-    align-items: center !important;
-}
-
-
-/* Brand */
-.mc-brand-v3 span,
-.mc-brand span {
-    font-size: 27px !important;
-    font-weight: 800 !important;
-}
-
-
-/* Navigation typography */
-.st-key-nav_scanner button,
-.st-key-nav_how button,
-.st-key-nav_about button {
-    font-size: 17px !important;
-    font-weight: 560 !important;
-}
-
-
-/* Active navigation */
-.st-key-nav_scanner button[kind="primary"],
-.st-key-nav_how button[kind="primary"],
-.st-key-nav_about button[kind="primary"] {
-    font-weight: 750 !important;
-
-    color: #2563eb !important;
-
-    box-shadow:
-        inset 0 -3px 0 #2563eb !important;
-}
-
-
-/* Badge */
-.mc-pill,
-.mc-pill-v3 {
-    font-size: 13px !important;
-    font-weight: 700 !important;
-
-    padding: 9px 15px !important;
-}
-
-
-/* Tablet */
-@media (max-width: 900px) {
-
-    [data-testid="stMainBlockContainer"],
-    .stMainBlockContainer,
-    section.main > div.block-container,
-    .block-container {
-        padding-left: 22px !important;
-        padding-right: 22px !important;
-    }
-
-    .st-key-mc_nav [data-testid="stHorizontalBlock"] {
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-
-        flex-wrap: wrap !important;
-
-        row-gap: 8px !important;
-    }
-}
-
-
-/* Phone */
-@media (max-width: 600px) {
-
-    [data-testid="stMainBlockContainer"],
-    .stMainBlockContainer,
-    section.main > div.block-container,
-    .block-container {
-        padding-left: 12px !important;
-        padding-right: 12px !important;
-        padding-top: 14px !important;
-    }
-
-    .mc-brand-v3 span,
-    .mc-brand span {
-        font-size: 21px !important;
-    }
-
-    .st-key-nav_scanner button,
-    .st-key-nav_how button,
-    .st-key-nav_about button {
-        font-size: 14px !important;
-    }
 }
 
 </style>
@@ -908,7 +541,7 @@ def go_to(view: str) -> None:
 
 # ---------- Top bar ----------
 with st.container(border=True, key="topbar"):
-    brand_col, nav_col, pill_col = st.columns([1.55, 1.35, .75], vertical_alignment="center")
+    brand_col, nav_col, pill_col = st.columns([1.15, 1.50, 1.15], gap="small", vertical_alignment="center")
 
     with brand_col:
         st.html('<div class="mc-brand"><div class="mc-mark">M</div><span>ModerContext</span></div>')
