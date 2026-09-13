@@ -1,0 +1,7 @@
+PUT YOUR FINAL TRAINED CHECKPOINT IN THIS FOLDER.
+
+Required final path:
+    model/best_model.pt
+
+Copy the original checkpoint. Do not move or rename the original on your research server.
+If the copied file has a different filename, rename only the COPY to: best_model.pt
