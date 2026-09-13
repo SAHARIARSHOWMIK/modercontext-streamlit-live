@@ -459,6 +459,284 @@ footer {
     }
 }
 
+
+/* MODERCONTEXT_HEADER_V2 */
+
+/* =========================================
+   HEADER CONTAINER
+   ========================================= */
+
+.st-key-mc_nav {
+    width: calc(100% - 40px) !important;
+    max-width: 1200px !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 8px !important;
+    margin-bottom: 34px !important;
+}
+
+/* Main white navbar card */
+.st-key-mc_nav [data-testid="stVerticalBlockBorderWrapper"] {
+    width: 100% !important;
+
+    background: rgba(255, 255, 255, 0.98) !important;
+
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 18px !important;
+
+    padding: 10px 18px !important;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.02),
+        0 8px 28px rgba(15, 23, 42, 0.045) !important;
+}
+
+
+/* =========================================
+   LOGO / BRAND
+   ========================================= */
+
+.mc-brand {
+    display: flex !important;
+    align-items: center !important;
+
+    gap: 13px !important;
+
+    font-size: 25px !important;
+    line-height: 1 !important;
+
+    font-weight: 800 !important;
+    letter-spacing: -0.035em !important;
+
+    color: #0b1739 !important;
+
+    white-space: nowrap !important;
+}
+
+.mc-mark {
+    width: 40px !important;
+    height: 44px !important;
+
+    display: grid !important;
+    place-items: center !important;
+
+    font-size: 19px !important;
+    font-weight: 850 !important;
+}
+
+
+/* =========================================
+   NAVIGATION
+   ========================================= */
+
+.st-key-nav_scanner,
+.st-key-nav_how,
+.st-key-nav_about {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Normal navigation item */
+.st-key-nav_scanner button,
+.st-key-nav_how button,
+.st-key-nav_about button {
+    width: auto !important;
+    min-width: auto !important;
+
+    height: 44px !important;
+    min-height: 44px !important;
+
+    padding: 0 16px !important;
+
+    background: transparent !important;
+
+    border: none !important;
+    border-radius: 0 !important;
+
+    color: #64748b !important;
+
+    font-size: 17.5px !important;
+    line-height: 1 !important;
+
+    font-weight: 550 !important;
+    letter-spacing: -0.015em !important;
+
+    white-space: nowrap !important;
+
+    box-shadow: none !important;
+
+    transition:
+        color 0.16s ease,
+        background-color 0.16s ease !important;
+}
+
+/* Hover */
+.st-key-nav_scanner button:hover,
+.st-key-nav_how button:hover,
+.st-key-nav_about button:hover {
+    color: #2563eb !important;
+    background: transparent !important;
+}
+
+/* Active navigation item */
+.st-key-nav_scanner button[kind="primary"],
+.st-key-nav_how button[kind="primary"],
+.st-key-nav_about button[kind="primary"] {
+    color: #2563eb !important;
+
+    font-weight: 750 !important;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow:
+        inset 0 -3px 0 #2563eb !important;
+}
+
+/* Remove Streamlit focus decoration */
+.st-key-nav_scanner button:focus,
+.st-key-nav_how button:focus,
+.st-key-nav_about button:focus {
+    outline: none !important;
+}
+
+.st-key-nav_scanner button[kind="primary"]:focus,
+.st-key-nav_how button[kind="primary"]:focus,
+.st-key-nav_about button[kind="primary"]:focus {
+    box-shadow:
+        inset 0 -3px 0 #2563eb !important;
+}
+
+
+/* =========================================
+   RESEARCH PROTOTYPE BADGE
+   ========================================= */
+
+.mc-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 9px 15px !important;
+
+    border: 1px solid #d8e5ff !important;
+    border-radius: 999px !important;
+
+    background: #f4f8ff !important;
+
+    color: #245bd7 !important;
+
+    font-size: 13.5px !important;
+    line-height: 1 !important;
+
+    font-weight: 700 !important;
+    letter-spacing: -0.005em !important;
+
+    white-space: nowrap !important;
+}
+
+
+/* =========================================
+   RESPONSIVENESS
+   ========================================= */
+
+@media (max-width: 1050px) {
+
+    .st-key-mc_nav {
+        width: calc(100% - 28px) !important;
+    }
+
+    .mc-brand {
+        font-size: 22px !important;
+    }
+
+    .mc-mark {
+        width: 37px !important;
+        height: 41px !important;
+        font-size: 17px !important;
+    }
+
+    .st-key-nav_scanner button,
+    .st-key-nav_how button,
+    .st-key-nav_about button {
+        font-size: 16px !important;
+        padding: 0 11px !important;
+    }
+
+    .mc-pill {
+        font-size: 12px !important;
+        padding: 8px 11px !important;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .st-key-mc_nav {
+        width: calc(100% - 20px) !important;
+    }
+
+    .st-key-mc_nav [data-testid="stVerticalBlockBorderWrapper"] {
+        padding: 10px 12px !important;
+    }
+
+    /* Allow Streamlit header columns to wrap instead of overflow */
+    .st-key-mc_nav [data-testid="stHorizontalBlock"] {
+        flex-wrap: wrap !important;
+        row-gap: 8px !important;
+    }
+
+    .mc-brand {
+        font-size: 20px !important;
+    }
+
+    .st-key-nav_scanner button,
+    .st-key-nav_how button,
+    .st-key-nav_about button {
+        height: 38px !important;
+        min-height: 38px !important;
+
+        font-size: 15px !important;
+        padding: 0 9px !important;
+    }
+
+    .mc-pill {
+        font-size: 11.5px !important;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .st-key-mc_nav {
+        width: calc(100% - 14px) !important;
+    }
+
+    .mc-brand {
+        font-size: 19px !important;
+    }
+
+    .mc-mark {
+        width: 34px !important;
+        height: 38px !important;
+    }
+
+    .st-key-nav_scanner button,
+    .st-key-nav_how button,
+    .st-key-nav_about button {
+        font-size: 14px !important;
+        padding: 0 7px !important;
+    }
+
+    .mc-pill {
+        font-size: 10.5px !important;
+        padding: 7px 9px !important;
+    }
+}
+
 </style>
 '''
 )
