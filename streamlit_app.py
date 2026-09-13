@@ -737,6 +737,152 @@ footer {
     }
 }
 
+
+/* FINAL_PAGE_WIDTH_FIX */
+
+/*
+   IMPORTANT:
+   Streamlit's parent page container controls the real width.
+   Constrain that first, then let the navbar fill it.
+*/
+
+[data-testid="stMainBlockContainer"],
+.stMainBlockContainer,
+section.main > div.block-container,
+.block-container {
+    width: 100% !important;
+    max-width: 1320px !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+    padding-top: 26px !important;
+}
+
+
+/* Navbar now fills the CENTERED application container */
+.st-key-nav_outer {
+    width: 100% !important;
+    max-width: none !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+/* Actual navbar card */
+.st-key-mc_nav {
+    width: 100% !important;
+    max-width: none !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    border-radius: 16px !important;
+}
+
+
+/* Header row */
+.st-key-mc_nav [data-testid="stHorizontalBlock"] {
+    width: 100% !important;
+
+    min-height: 76px !important;
+
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+
+    align-items: center !important;
+}
+
+
+/* Brand */
+.mc-brand-v3 span,
+.mc-brand span {
+    font-size: 27px !important;
+    font-weight: 800 !important;
+}
+
+
+/* Navigation typography */
+.st-key-nav_scanner button,
+.st-key-nav_how button,
+.st-key-nav_about button {
+    font-size: 17px !important;
+    font-weight: 560 !important;
+}
+
+
+/* Active navigation */
+.st-key-nav_scanner button[kind="primary"],
+.st-key-nav_how button[kind="primary"],
+.st-key-nav_about button[kind="primary"] {
+    font-weight: 750 !important;
+
+    color: #2563eb !important;
+
+    box-shadow:
+        inset 0 -3px 0 #2563eb !important;
+}
+
+
+/* Badge */
+.mc-pill,
+.mc-pill-v3 {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+
+    padding: 9px 15px !important;
+}
+
+
+/* Tablet */
+@media (max-width: 900px) {
+
+    [data-testid="stMainBlockContainer"],
+    .stMainBlockContainer,
+    section.main > div.block-container,
+    .block-container {
+        padding-left: 22px !important;
+        padding-right: 22px !important;
+    }
+
+    .st-key-mc_nav [data-testid="stHorizontalBlock"] {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+
+        flex-wrap: wrap !important;
+
+        row-gap: 8px !important;
+    }
+}
+
+
+/* Phone */
+@media (max-width: 600px) {
+
+    [data-testid="stMainBlockContainer"],
+    .stMainBlockContainer,
+    section.main > div.block-container,
+    .block-container {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        padding-top: 14px !important;
+    }
+
+    .mc-brand-v3 span,
+    .mc-brand span {
+        font-size: 21px !important;
+    }
+
+    .st-key-nav_scanner button,
+    .st-key-nav_how button,
+    .st-key-nav_about button {
+        font-size: 14px !important;
+    }
+}
+
 </style>
 '''
 )
