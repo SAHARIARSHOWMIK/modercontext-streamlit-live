@@ -36,10 +36,93 @@ html, body, [class*="css"] { font-family: Inter, ui-sans-serif, system-ui, -appl
 .meta { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:26px; padding-top:22px; border-top:1px solid #e4eaf2; } .meta-box { background:#f8faff; border-radius:11px; padding:13px; } .meta-box span { display:block; color:#909caf; font-size:9px; font-weight:850; letter-spacing:.08em; text-transform:uppercase; } .meta-box b { display:block; margin-top:5px; color:#293750; font-size:12px; overflow-wrap:anywhere; }
 .lower { margin-top:88px; } .lower-title { text-align:center; color:#0b1739; font-size:31px; font-weight:800; letter-spacing:-.03em; } .guide-num { color:#2f6cf6; font-size:11px; font-weight:900; letter-spacing:.1em; } .guide-title { margin-top:18px; color:#0b1739; font-size:17px; font-weight:800; } .guide-copy { margin-top:7px; color:#6d7890; font-size:13px; line-height:1.7; } .about { color:#5c6a82; line-height:1.8; font-size:14px; }
 @media(max-width:850px){ .mc-links{display:none}.mc-pill{display:none}.meta{grid-template-columns:1fr}.hero-title{font-size:36px} }
+
+.st-key-mc_nav { margin-bottom:48px; }
+
+.st-key-nav_scanner button,
+.st-key-nav_how button,
+.st-key-nav_about button {
+    min-height:36px !important;
+    padding:0 10px !important;
+    border:none !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    color:#60708e !important;
+    font-weight:700 !important;
+}
+
+.st-key-nav_scanner button[kind="primary"],
+.st-key-nav_how button[kind="primary"],
+.st-key-nav_about button[kind="primary"] {
+    color:#2f6cf6 !important;
+}
+
 </style>
 ''')
 
-st.html('''<div class="mc-nav"><div class="mc-brand"><div class="mc-mark">M</div><span>ModerContext</span></div><div class="mc-links"><button type="button" data-target="scanner">Scanner</button><button type="button" data-target="how-to-use">How to use</button><button type="button" data-target="about">About</button></div><div class="mc-pill">Research Prototype</div></div><div id="scanner"></div><div class="eyebrow">Source Code Security Scanner</div><div class="hero-title">Analyze C/C++ code for <b>potential vulnerabilities</b></div><div class="hero-copy">Submit one C or C++ function and ModerContext will process the source code, analyze its security-relevant context, and return a clear vulnerability detection result.</div><script>document.querySelectorAll('.mc-links button[data-target]').forEach(function(btn){btn.addEventListener('click',function(){var el=document.getElementById(btn.dataset.target);if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}});});</script>''', unsafe_allow_javascript=True)
+if "nav_view" not in st.session_state:
+    st.session_state.nav_view = "Scanner"
+
+def _go_nav(view):
+    st.session_state.nav_view = view
+
+with st.container(border=True, key="mc_nav"):
+    brand_col, nav_col, pill_col = st.columns(
+        [1.65, 1.45, .80],
+        vertical_alignment="center"
+    )
+
+    with brand_col:
+        st.html(
+            '<div class="mc-brand">'
+            '<div class="mc-mark">M</div>'
+            '<span>ModerContext</span>'
+            '</div>'
+        )
+
+    with nav_col:
+        with st.container(
+            horizontal=True,
+            horizontal_alignment="center",
+            vertical_alignment="center",
+            gap="small"
+        ):
+            st.button(
+                "Scanner",
+                key="nav_scanner",
+                type="primary"
+                if st.session_state.nav_view == "Scanner"
+                else "tertiary",
+                on_click=_go_nav,
+                args=("Scanner",)
+            )
+
+            st.button(
+                "How to use",
+                key="nav_how",
+                type="primary"
+                if st.session_state.nav_view == "How to use"
+                else "tertiary",
+                on_click=_go_nav,
+                args=("How to use",)
+            )
+
+            st.button(
+                "About",
+                key="nav_about",
+                type="primary"
+                if st.session_state.nav_view == "About"
+                else "tertiary",
+                on_click=_go_nav,
+                args=("About",)
+            )
+
+    with pill_col:
+        st.html(
+            '<div style="display:flex;justify-content:flex-end">'
+            '<div class="mc-pill">Research Prototype</div>'
+            '</div>'
+        )
 
 DEFAULT_CODE = '''void process_input(const char *input) {
     char buffer[64];
@@ -91,60 +174,123 @@ def result_html(result):
     sec = html.escape(str(result.get("analysis_seconds", "—")))
     return f'<div class="result"><div class="result-icon {icls}">{icon}</div><div class="result-kicker {kcls}">{kicker}</div><h2>{title}</h2><p>{copy}</p><div class="meta"><div class="meta-box"><span>Language</span><b>{lang}</b></div><div class="meta-box"><span>Function</span><b>{fn}</b></div><div class="meta-box"><span>Analysis time</span><b>{sec} sec</b></div></div></div>'
 
-left, right = st.columns([1.08, .92], gap="large")
-with left:
-    with st.container(border=True):
-        st.html('<div class="panel-kicker">Input</div><div class="panel-title">Source code</div><div class="panel-copy">One C or C++ function at a time.</div>')
-        code_value = st_ace(value=st.session_state.code, language="c_cpp", theme="github", keybinding="vscode", font_size=14, tab_size=4, show_gutter=True, show_print_margin=False, wrap=False, auto_update=True, min_lines=22, max_lines=30, key=f"editor_{st.session_state.editor_key}")
-        if code_value is not None: st.session_state.code = code_value
-        a, c = st.columns([4, 1.15])
-        with a: analyze = st.button("▶  Analyze code", type="primary", use_container_width=True)
-        with c: clear = st.button("Clear", use_container_width=True)
-        st.caption("Predictions are intended to support secure code review.")
+if st.session_state.nav_view == "Scanner":
+    st.html(
+        '<div class="eyebrow">Source Code Security Scanner</div>'
+        '<div class="hero-title">'
+        'Analyze C/C++ code for <b>potential vulnerabilities</b>'
+        '</div>'
+        '<div class="hero-copy">'
+        'Submit one C or C++ function and ModerContext will process '
+        'the source code, analyze its security-relevant context, '
+        'and return a clear vulnerability detection result.'
+        '</div>'
+    )
 
-if clear:
-    st.session_state.code = ""
-    st.session_state.result = None
-    st.session_state.editor_key += 1
-    st.rerun()
+    left, right = st.columns([1.08, .92], gap="large")
+    with left:
+        with st.container(border=True):
+            st.html('<div class="panel-kicker">Input</div><div class="panel-title">Source code</div><div class="panel-copy">One C or C++ function at a time.</div>')
+            code_value = st_ace(value=st.session_state.code, language="c_cpp", theme="github", keybinding="vscode", font_size=14, tab_size=4, show_gutter=True, show_print_margin=False, wrap=False, auto_update=True, min_lines=22, max_lines=30, key=f"editor_{st.session_state.editor_key}")
+            if code_value is not None: st.session_state.code = code_value
+            a, c = st.columns([4, 1.15])
+            with a: analyze = st.button("▶  Analyze code", type="primary", use_container_width=True)
+            with c: clear = st.button("Clear", use_container_width=True)
+            st.caption("Predictions are intended to support secure code review.")
 
-with right:
-    with st.container(border=True):
-        if not MODEL_PATH.exists():
-            st.html('<div class="ready"><div class="ready-icon">⚙</div><h2>Model file required</h2><p>Place the trained checkpoint at <b>model/best_model.pt</b>. The app will use that file automatically.</p></div>')
-        elif analyze:
-            source = (st.session_state.code or "").strip()
-            if not source:
-                st.warning("Please paste a C or C++ function first.")
+    if clear:
+        st.session_state.code = ""
+        st.session_state.result = None
+        st.session_state.editor_key += 1
+        st.rerun()
+
+    with right:
+        with st.container(border=True):
+            if not MODEL_PATH.exists():
+                st.html('<div class="ready"><div class="ready-icon">⚙</div><h2>Model file required</h2><p>Place the trained checkpoint at <b>model/best_model.pt</b>. The app will use that file automatically.</p></div>')
+            elif analyze:
+                source = (st.session_state.code or "").strip()
+                if not source:
+                    st.warning("Please paste a C or C++ function first.")
+                else:
+                    st.html('<div class="scan-title">Analyzing your function</div><div class="scan-copy">Please wait while ModerContext processes the submitted code.</div>')
+                    bar = st.progress(3, text="Preparing the analyzer...")
+                    stage_box = st.empty(); stage_box.html(stages_html("validate"))
+                    try:
+                        scanner = get_scanner()
+                        def update(stage, percent, message):
+                            bar.progress(int(percent), text=str(message))
+                            if stage in INDEX: stage_box.html(stages_html(stage))
+                        st.session_state.result = scanner.analyze(source, progress_callback=update)
+                        time.sleep(.2)
+                        st.rerun()
+                    except Exception as exc:
+                        st.error("ModerContext could not analyze the submitted function.")
+                        with st.expander("Technical details"): st.exception(exc)
+            elif st.session_state.result is not None:
+                st.html(result_html(st.session_state.result))
+                if st.button("↻  Analyze another function", use_container_width=True):
+                    st.session_state.result = None; st.rerun()
             else:
-                st.html('<div class="scan-title">Analyzing your function</div><div class="scan-copy">Please wait while ModerContext processes the submitted code.</div>')
-                bar = st.progress(3, text="Preparing the analyzer...")
-                stage_box = st.empty(); stage_box.html(stages_html("validate"))
-                try:
-                    scanner = get_scanner()
-                    def update(stage, percent, message):
-                        bar.progress(int(percent), text=str(message))
-                        if stage in INDEX: stage_box.html(stages_html(stage))
-                    st.session_state.result = scanner.analyze(source, progress_callback=update)
-                    time.sleep(.2)
-                    st.rerun()
-                except Exception as exc:
-                    st.error("ModerContext could not analyze the submitted function.")
-                    with st.expander("Technical details"): st.exception(exc)
-        elif st.session_state.result is not None:
-            st.html(result_html(st.session_state.result))
-            if st.button("↻  Analyze another function", use_container_width=True):
-                st.session_state.result = None; st.rerun()
-        else:
-            st.html('<div class="ready"><div class="ready-icon">⌕</div><div class="panel-kicker">Scanner ready</div><h2>Ready to analyze</h2><p>Paste a C or C++ function in the editor and select <b>Analyze code</b> to begin.</p></div>')
+                st.html('<div class="ready"><div class="ready-icon">⌕</div><div class="panel-kicker">Scanner ready</div><h2>Ready to analyze</h2><p>Paste a C or C++ function in the editor and select <b>Analyze code</b> to begin.</p></div>')
 
-st.html('<div id="how-to-use" class="lower"><div class="eyebrow" style="text-align:center">Simple workflow</div><div class="lower-title">How to use ModerContext</div></div>')
-cols = st.columns(3, gap="medium")
-items = [("01", "Paste your function", "Copy one C or C++ function into the source-code editor."), ("02", "Run the analysis", "ModerContext pre-processes and evaluates the submitted source code."), ("03", "Review the result", "Receive a clear vulnerability detection outcome to support secure code review.")]
-for col, (num, title, copy) in zip(cols, items):
-    with col:
-        with st.container(border=True): st.html(f'<div class="guide-num">{num}</div><div class="guide-title">{title}</div><div class="guide-copy">{copy}</div>')
+elif st.session_state.nav_view == "How to use":
+    st.html(
+        '<div class="lower" style="margin-top:22px">'
+        '<div class="eyebrow" style="text-align:center">'
+        'Simple workflow'
+        '</div>'
+        '<div class="lower-title">How to use ModerContext</div>'
+        '</div>'
+    )
 
-st.html('<div id="about" class="lower"><div class="eyebrow" style="text-align:center">About the prototype</div><div class="lower-title">ModerContext</div></div>')
-with st.container(border=True):
-    st.html("""<div class="about"><b>ModerContext</b> is a master's research prototype for source code vulnerability detection. It applies the proposed context-aware processing methodology and a trained long-context classifier to C/C++ functions. The prototype demonstrates practical use of the research approach; its output should support, not replace, professional secure code review.</div>""")
+    cols = st.columns(3, gap="medium")
+
+    items = [
+        (
+            "01",
+            "Paste your function",
+            "Copy one C or C++ function into the source-code editor."
+        ),
+        (
+            "02",
+            "Run the analysis",
+            "ModerContext pre-processes and evaluates the submitted source code."
+        ),
+        (
+            "03",
+            "Review the result",
+            "Receive a clear vulnerability detection outcome to support secure code review."
+        ),
+    ]
+
+    for col, (num, title, copy) in zip(cols, items):
+        with col:
+            with st.container(border=True):
+                st.html(
+                    f'<div class="guide-num">{num}</div>'
+                    f'<div class="guide-title">{title}</div>'
+                    f'<div class="guide-copy">{copy}</div>'
+                )
+
+else:
+    st.html(
+        '<div class="lower" style="margin-top:22px">'
+        '<div class="eyebrow" style="text-align:center">'
+        'About the prototype'
+        '</div>'
+        '<div class="lower-title">ModerContext</div>'
+        '</div>'
+    )
+
+    with st.container(border=True):
+        st.html(
+            """<div class="about">
+            <b>ModerContext</b> is a master's research prototype for
+            source code vulnerability detection. It applies the proposed
+            context-aware processing methodology and a trained long-context
+            classifier to C/C++ functions. The prototype demonstrates
+            practical use of the research approach; its output should
+            support, not replace, professional secure code review.
+            </div>"""
+        )
