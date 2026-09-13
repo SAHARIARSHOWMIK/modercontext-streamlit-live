@@ -269,6 +269,196 @@ div[data-testid="stProgress"] > div > div > div { background:linear-gradient(90d
   .mc-hero-title { font-size:38px; }
   .meta { grid-template-columns:1fr; }
 }
+
+/* SENIOR_NAV_POLISH_V1 */
+
+/* ---------- Streamlit chrome ---------- */
+[data-testid="stToolbar"] {
+    display: none !important;
+}
+
+#MainMenu {
+    visibility: hidden !important;
+}
+
+footer {
+    visibility: hidden !important;
+}
+
+/* ---------- Main navbar ---------- */
+.st-key-mc_nav {
+    margin-top: 4px !important;
+    margin-bottom: 30px !important;
+}
+
+/* Border container */
+.st-key-mc_nav [data-testid="stVerticalBlockBorderWrapper"] {
+    background: rgba(255,255,255,0.98) !important;
+    border: 1px solid #e5eaf2 !important;
+    border-radius: 18px !important;
+
+    padding: 8px 16px !important;
+
+    box-shadow:
+        0 1px 2px rgba(15,23,42,0.02),
+        0 8px 24px rgba(15,23,42,0.045) !important;
+}
+
+/* Remove unnecessary vertical spacing */
+.st-key-mc_nav [data-testid="stVerticalBlock"] {
+    gap: 0 !important;
+}
+
+/* ---------- Brand ---------- */
+.mc-brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+
+    color: #0b1739 !important;
+    font-size: 21px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.025em !important;
+    white-space: nowrap !important;
+}
+
+.mc-mark {
+    width: 36px !important;
+    height: 40px !important;
+
+    display: grid !important;
+    place-items: center !important;
+
+    font-size: 17px !important;
+    font-weight: 850 !important;
+}
+
+/* ---------- Navigation ---------- */
+.st-key-nav_scanner,
+.st-key-nav_how,
+.st-key-nav_about {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.st-key-nav_scanner button,
+.st-key-nav_how button,
+.st-key-nav_about button {
+    min-height: 38px !important;
+    height: 38px !important;
+
+    width: auto !important;
+    min-width: auto !important;
+
+    padding: 0 14px !important;
+
+    border: 0 !important;
+    border-radius: 8px !important;
+
+    background: transparent !important;
+
+    color: #64748b !important;
+
+    font-size: 14px !important;
+    font-weight: 650 !important;
+    letter-spacing: -0.01em !important;
+
+    box-shadow: none !important;
+
+    transition:
+        background-color .16s ease,
+        color .16s ease !important;
+}
+
+/* Hover */
+.st-key-nav_scanner button:hover,
+.st-key-nav_how button:hover,
+.st-key-nav_about button:hover {
+    background: #f6f8fc !important;
+    color: #1e5fe5 !important;
+}
+
+/* Active page */
+.st-key-nav_scanner button[kind="primary"],
+.st-key-nav_how button[kind="primary"],
+.st-key-nav_about button[kind="primary"] {
+    background: transparent !important;
+    color: #2563eb !important;
+
+    border-radius: 0 !important;
+
+    box-shadow:
+        inset 0 -2px 0 #2563eb !important;
+
+    font-weight: 750 !important;
+}
+
+/* Remove focus ring visual noise */
+.st-key-nav_scanner button:focus,
+.st-key-nav_how button:focus,
+.st-key-nav_about button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.st-key-nav_scanner button[kind="primary"]:focus,
+.st-key-nav_how button[kind="primary"]:focus,
+.st-key-nav_about button[kind="primary"]:focus {
+    box-shadow:
+        inset 0 -2px 0 #2563eb !important;
+}
+
+/* ---------- Research badge ---------- */
+.mc-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 7px 12px !important;
+
+    border: 1px solid #dce7fb !important;
+    border-radius: 999px !important;
+
+    background: #f7faff !important;
+
+    color: #245bd7 !important;
+
+    font-size: 11px !important;
+    font-weight: 750 !important;
+    letter-spacing: .01em !important;
+
+    white-space: nowrap !important;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 850px) {
+
+    .st-key-mc_nav [data-testid="stVerticalBlockBorderWrapper"] {
+        padding: 10px 12px !important;
+    }
+
+    .mc-brand {
+        font-size: 18px !important;
+    }
+
+    .mc-mark {
+        width: 32px !important;
+        height: 36px !important;
+    }
+
+    .st-key-nav_scanner button,
+    .st-key-nav_how button,
+    .st-key-nav_about button {
+        font-size: 13px !important;
+        padding: 0 9px !important;
+    }
+
+    .mc-pill {
+        font-size: 10px !important;
+        padding: 6px 9px !important;
+    }
+}
+
 </style>
 '''
 )
